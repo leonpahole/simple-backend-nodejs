@@ -1,6 +1,6 @@
 set -u
 
-CONFIG_FILE=release.env
+CONFIG_FILE=./bin/release.env
 
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "Configuration file $CONFIG_FILE does not exist. Please create it."
