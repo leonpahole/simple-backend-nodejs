@@ -94,6 +94,7 @@ if [[ $PUSH_TO_DOCKER_REGISTRY_RESPONSE == "y" || $PUSH_TO_DOCKER_REGISTRY_RESPO
         if [ $DRY_RUN -eq 0 ]; then
             yarn config set version-tag-prefix ""
             yarn version --new-version $NEXT_VERSION
+            git push --tags
         fi
 
         # tag image
