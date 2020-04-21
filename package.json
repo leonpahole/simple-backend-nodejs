@@ -1,0 +1,26 @@
+{
+  "name": "simple-backend-nodejs",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Leon Pahole",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.0.2",
+    "sequelize": "^5.21.6",
+    "sqlite3": "^4.1.1"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "npx nodemon",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3",
+    "sequelize-cli": "^5.5.1"
+  }
+}

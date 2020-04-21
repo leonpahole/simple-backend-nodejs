@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: simple_backend_api
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+    ports:
+      - ${API_OUTSIDE_PORT:-3000}:3000
+    depends_on:
+      - db
+    environment:
+      DB_NAME: ${DB_NAME:-sample}
+      DB_USERNAME: ${DB_USERNAME:-sample}
+      DB_PASSWORD: ${DB_PASSWORD:-sample}
+      DB_HOST: ${DB_HOST:-db}
+
+  db:
+    container_name: simple_backend_db
+    image: postgres:12
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME:-sample}
+      POSTGRES_USER: ${DB_USERNAME:-sample}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-sample}
+
+  dbadm:
+    container_name: simple_backend_admin
+    image: adminer
+    depends_on:
+      - db
+    ports:
+      - ${ADMINER_OUTSIDE_PORT:-8080}:8080
+
+volumes:
+  dbdata:
