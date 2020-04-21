@@ -19,6 +19,13 @@ echo "### BUILD ####"
 
 # try to build image first to detect any early errors
 docker build -t $IMAGE_NAME:latest .
+        
+BUILD_SUCCESS=$?
+
+if [ $BUILD_SUCCESS -ne 0 ]; then
+    echo "Build failed."
+    exit
+fi
 
 # ask about docker deployment, if user says yes, login to docker
 read -p "Push image to registry $REGISTRY_URL (y/n)? [n] " PUSH_TO_DOCKER_REGISTRY_RESPONSE
