@@ -11,7 +11,18 @@ FROM node:12.16-alpine
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
+EXPOSE 3000
+
+# install bash in alpine
+RUN apk add --no-cache bash
+
+RUN mkdir -p /usr/src/app && chown node:node /usr/src/app
 WORKDIR /usr/src/app
+
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+USER node
 
 # Copy package json without version from previous build stage
 COPY --from=deps /tmp/deps.json ./package.json
@@ -22,6 +33,6 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-EXPOSE 3000
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
 
 CMD [ "node", "src/index.js" ]
