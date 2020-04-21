@@ -85,10 +85,8 @@ if [[ $PUSH_TO_DOCKER_REGISTRY_RESPONSE == "y" || $PUSH_TO_DOCKER_REGISTRY_RESPO
         # create git tag
         echo "Tagging git with ${NEXT_VERSION}"
         if [ $DRY_RUN -eq 0 ]; then
-            git tag $NEXT_VERSION
-            git push --tags
-            # yarn config set version-tag-prefix ""
-            # yarn version --new-version $NEXT_VERSION
+            yarn config set version-tag-prefix ""
+            yarn version --new-version $NEXT_VERSION
         fi
 
         # tag image
