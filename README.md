@@ -22,3 +22,9 @@ This is a backend that is extremely simplified. It is not really meant for anyth
 `docker-compose up -d`
 `docker-compose exec api yarn migrate`
 `docker-compose exec api yarn seed`
+
+## Release
+
+Copy `bin/release.env.example` to `bin/release.env`
+
+`bash bin/release.sh`
